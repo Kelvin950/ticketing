@@ -14,7 +14,13 @@ spec :
     spec:
       containers:
         - name: auth
-          image: kelvin/auth
+          image: us.gcr.io/ticket-dev-340116/auth
+          env:
+            - name : JWt_KEY
+              valueFrom :
+                secretKeyRef :   
+                  name: jwt-secret
+                  key: JWt_KEY
 ---
 apiVersion: v1
 kind: Service

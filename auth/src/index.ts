@@ -28,6 +28,10 @@ app.get("*" , async(req ,res,next)=>{
 app.use(errorHandler)
 
 const start =  async()=>{
+
+  if(!process.env.JWt_KEY){
+    throw new Error("JWt key must be defined");
+  }
  try{
   const host = await mongoose.connect("mongodb://auth-mongo-srv:27017/auth")
   console.log(`host ${host.connection.host}`)

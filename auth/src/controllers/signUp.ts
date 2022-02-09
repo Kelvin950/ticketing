@@ -7,16 +7,6 @@ import jwt from 'jsonwebtoken';
 const signUpController =  
 async (req:Request ,res:Response )=>{
 
-
-
-const errors =  validationResult(req) ;
-if(!errors.isEmpty()){
-const error =  new Error("jfjf");
-
-throw new RequestValidationError(errors.array());
-
-
-}
 const {email , password }:{email:string , password:string} =  req.body ;
      
 
@@ -37,13 +27,18 @@ await user.save() ;
 const userJwt =  jwt.sign({
     id:user.id  ,
     email:user.email 
-} , 'asdf'  );
+} ,  
+ process.env.JWt_KEY!
+);
 
  req.session =  {
      jwt:userJwt
  } ; 
-res.status(201).send(user
-) ;
+res.status(201).json({
+    id:user._id ,
+    email:user.email
+})
+ ;
 
 
 }
