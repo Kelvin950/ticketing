@@ -15,6 +15,7 @@ const existingUser =  await User.findOne({email});
 if(existingUser){
     // console.log("Email in use");
     // return res.send({});
+   
     throw new BadRequestError('Email in use');
 }
 
@@ -23,6 +24,7 @@ const user  =  User.build({
     email , password
 });
 await user.save() ;
+
 
 const userJwt =  jwt.sign({
     id:user.id  ,
@@ -34,10 +36,7 @@ const userJwt =  jwt.sign({
  req.session =  {
      jwt:userJwt
  } ; 
-res.status(201).json({
-    id:user._id ,
-    email:user.email
-})
+res.status(201).send(user)
  ;
 
 

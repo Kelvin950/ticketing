@@ -38,16 +38,16 @@ const userSchema =  new Schema({
          type:String ,
          required:true
      }
-// }  , {
-//     toJSON:{
-//         transform(doc ,ret){
-//             ret.id =  ret._id;
-//             delete ret._id;
-//             delete ret.password;
-//             delete ret.__v;
+}  , {
+    toJSON:{
+        transform(doc ,ret){
+            ret.id =  ret._id;
+            delete ret._id;
+            delete ret.password;
+            delete ret.__v;
 
-//         }
-    //}
+        }
+    }
 });
 
 
@@ -59,14 +59,15 @@ userSchema.pre('save' , async function(done){
        done();  
 });
 
+
 userSchema.statics.build =  (attrs:UserAttr)=>{
 
     return new User(attrs);
 };
-
-
 const User = mongoose.model<UserDoc, UserModel>("USER" , userSchema);
 
 
 
-export {User };
+
+
+export {User};

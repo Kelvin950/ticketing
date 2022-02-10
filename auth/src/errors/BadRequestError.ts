@@ -1,6 +1,4 @@
 import {CustomError} from  './CustomError'
-
-
 export class BadRequestError extends CustomError{
 
 
@@ -10,7 +8,7 @@ export class BadRequestError extends CustomError{
 
         super(message);
     
-        Object.setPrototypeOf(this , BadRequestError);
+        Object.setPrototypeOf(this , BadRequestError.prototype);
     }
 
 
