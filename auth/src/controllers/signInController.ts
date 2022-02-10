@@ -14,9 +14,9 @@ const signIn = async (req:Request ,res:Response)=>{
         throw new BadRequestError("Invalid credentials");
     }
 
-console.log(existingUser);
+// console.log(existingUser);
    const passwordMatch = await Password.compare(existingUser.password , password);
-console.log(passwordMatch);
+// console.log(passwordMatch);
    if(!passwordMatch){
        throw new  BadRequestError("Invalid credentials");
    }
