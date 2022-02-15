@@ -17,4 +17,12 @@ build :
       sync :
         manual :
           - src: 'src/**/*.ts'
+            dest: . 
+    - image: us.gcr.io/ticket-dev-340116/client
+      context: client
+      docker:
+        dockerfile : Dockerfile
+      sync :
+        manual :
+          - src: '**/*.js'
             dest: .

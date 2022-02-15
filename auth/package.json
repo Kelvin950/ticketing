@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+ 
   "scripts": {
     "test": "jest --watchAll --no-cache",
     "start": "ts-node-dev --poll src/index.ts"
