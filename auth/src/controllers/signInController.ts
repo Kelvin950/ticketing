@@ -2,7 +2,7 @@ import {Request ,Response}  from 'express';
 import 'express-async-errors'
 import jwt from 'jsonwebtoken';
  import {User} from '../Models/Users';
- import {BadRequestError} from '../errors/BadRequestError';
+ import {BadRequestError} from '@katickets212/common'
  import {Password} from '../services/password';
 const signIn = async (req:Request ,res:Response)=>{
   

@@ -4,8 +4,8 @@ import {signInRouter}  from './Route/SignIn'
 import 'express-async-errors'
 import signOutRouter from  './Route/signout' ;
 import {signupRouter}  from './Route/signup'
-import {errorHandler} from './middleWares/error-handler'
-import {NotFoundError}  from './errors/NotFoundError';
+import {errorHandler} from '@katickets212/common'
+import {NotFoundError}  from '@katickets212/common'
 
 import cookieSession from 'cookie-session'
 const app = express();
