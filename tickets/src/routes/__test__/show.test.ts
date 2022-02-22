@@ -4,6 +4,8 @@ import mongoose from 'mongoose';
 import request from 'supertest';
 import {app} from '../../app';
 jest.setTimeout(6000);
+
+
 it("returns a 404 if the ticket is not found" ,async () => {
      const id = new  mongoose.Types.ObjectId().toHexString();   
     await request(app)

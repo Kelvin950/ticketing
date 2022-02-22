@@ -1,6 +1,9 @@
 import {Request ,Response,NextFunction} from 'express'
 import {Ticket} from '../Models/Ticket';
 import {NotFoundError ,NotAuthorizedError} from '@katickets212/common';
+import {TicketCreatedPublisher} from '../Events/publishers/ticket-created-publisher';
+ import {TicketUpdatedPublisher} from '../Events/publishers/ticket-updated';
+import {natsWrapper} from '../nats-wrapper'
 export const newTickets =async(req:Request , res:Response)=>{
 
     const {title ,price} =  req.body;
@@ -11,7 +14,14 @@ export const newTickets =async(req:Request , res:Response)=>{
     });
 
     await ticket.save();
+ await new TicketCreatedPublisher(natsWrapper.client).publish({
+    id:ticket.id,
+    title:ticket.title,
+    price:+ticket.price ,
+    userId:ticket.userId
 
+
+})
     res.status(201).send(ticket);
   
 }
@@ -59,7 +69,12 @@ ticket.set({
 });
 
 await ticket.save();
-
+ await new TicketUpdatedPublisher(natsWrapper.client).publish({
+      title:ticket.title ,
+      id:ticket.id ,
+      price:ticket.price ,
+      userId:ticket.userId
+ })
 res.send(ticket);
 
 }
