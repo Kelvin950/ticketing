@@ -2,8 +2,9 @@ import  express from 'express';
 
 const router =  express.Router();
 
-
-router.delete("/api/order/:orderId");
+import {requireAuth} from '@katickets212/common'
+import {deleteController} from '../controller/TicketController'
+router.delete("/api/order/:orderId" , requireAuth , deleteController);
 
 
 export {router as deleteOrderRouter};

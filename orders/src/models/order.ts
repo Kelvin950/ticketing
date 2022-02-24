@@ -1,6 +1,8 @@
 import mongoose from 'mongoose';
 import  {OrderStatus} from '@katickets212/common';
-import {TicketDoc} from './Ticket'
+import {TicketDoc} from './Ticket';
+
+export {OrderStatus};
 interface OrderAttrs{
    userId:string ;
    status:OrderStatus;
@@ -20,7 +22,7 @@ interface  OrderDoc extends  mongoose.Document {
 
 
 interface orderModel extends mongoose.Model<OrderDoc>{
-    buildOrders(atts:OrderAttrs):OrderDoc
+    buildOrders(attrs:OrderAttrs):OrderDoc
 }
 
 const orderSchema =  new mongoose.Schema({
@@ -61,7 +63,7 @@ const orderSchema =  new mongoose.Schema({
 
 
 
-orderSchema.statics.build =  (attrs:OrderAttrs)=>{
+orderSchema.statics.buildOrders =  (attrs:OrderAttrs)=>{
     return  new Order(attrs);
 }
 
