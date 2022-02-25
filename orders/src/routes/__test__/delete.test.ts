@@ -3,7 +3,7 @@ import request from 'supertest';
 import {Ticket} from '../../models/Ticket'
 import {Order , OrderStatus} from '../../models/order'
 import  {app} from '../../app'
-
+import {natsWrapper} from '../../nats-wrapper';
 it("should throw  a 404 erro , r" ,async()=>{
    
     const id =  new mongoose.Types.ObjectId();
@@ -89,4 +89,34 @@ expect(updatedOrder!.status).toEqual(OrderStatus.Cancelled);
 })
 
 
-it.todo("emits a order cancelled event")
+it("emits a order cancelled event" , async () => {
+    
+    const user1 =  global.signup();
+
+    const ticket =  Ticket.build({
+        title:'concer2t' ,
+        price:21
+    })
+await ticket.save();
+
+  const {body:order} = await request(app)
+ .post("/api/order")
+ .set("Cookie" ,user1)
+ .send({ticketId:ticket.id})
+.expect(201)
+
+ 
+
+ 
+
+
+await request(app)
+.delete(`/api/order/${order.id}`)
+.set("Cookie" , user1)
+.send()
+.expect(204)
+
+
+expect(natsWrapper.client.publish).toHaveBeenCalled();
+
+})

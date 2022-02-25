@@ -2,6 +2,9 @@ import {Request ,Response } from 'express'
 import 'express-async-errors';
  import {Ticket} from '../models/Ticket';
  import {Order} from '../models/order'
+ import {OrderCancelledPublisher} from '../Events/publishers/order-cancelled-event';
+ import {OrderCreatedPublisher} from  '../Events/publishers/order-createdd-events';
+ import {natsWrapper} from '../nats-wrapper';
 import {NotFoundError , OrderStatus ,BadRequestError ,NotAuthorizedError} from '@katickets212/common';
 const EXPIRATION_WINDOW_SECONDS =  15 *60;
 export const newController =  async (req:Request,res:Response )=>{
@@ -37,7 +40,16 @@ if(!ticket){
      
      await order.save();
    //publish an event
-
+new OrderCreatedPublisher(natsWrapper.client).publish({
+   id:order.id ,
+   status:order.status ,
+   userId:order.userId,
+   expiresAt:order.expiresAt.toISOString(),
+   ticket:{
+      id:ticket.id ,
+      price:ticket.price
+   }
+})
    res.status(201).send(order);
 }  ;
 
@@ -79,7 +91,7 @@ export const deleteController = async (req:Request ,res:Response)=>{
 
 const  {orderId} =  req.params;
 
-const order = await  Order.findById(orderId) ;
+const order = await  Order.findById(orderId).populate("ticket"); ;
 
 if(!order){
    throw new NotFoundError();
@@ -95,6 +107,11 @@ if(order.userId !== req.currentUser!.id){
 
   await order.save();
 //publishing an event saying this was cancelled
-
+  new OrderCancelledPublisher(natsWrapper.client).publish({
+     id:order.id ,
+     ticket:{
+        id:order.ticket.id
+     }
+  })
   res.status(204).send(order);
 }
