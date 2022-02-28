@@ -45,9 +45,11 @@ new OrderCreatedPublisher(natsWrapper.client).publish({
    status:order.status ,
    userId:order.userId,
    expiresAt:order.expiresAt.toISOString(),
+   version:order.version,
    ticket:{
       id:ticket.id ,
-      price:ticket.price
+      price:ticket.price,
+     
    }
 })
    res.status(201).send(order);
@@ -109,8 +111,10 @@ if(order.userId !== req.currentUser!.id){
 //publishing an event saying this was cancelled
   new OrderCancelledPublisher(natsWrapper.client).publish({
      id:order.id ,
+     version:order.version,
      ticket:{
-        id:order.ticket.id
+        id:order.ticket.id,
+      
      }
   })
   res.status(204).send(order);

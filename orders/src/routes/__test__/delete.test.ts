@@ -25,7 +25,8 @@ it("should throw a 400 bad request" , async () => {
 
     const ticket =  Ticket.build({
         title:'concer2t' ,
-        price:21
+        price:21,
+        id: new mongoose.Types.ObjectId().toHexString()
     })
 await ticket.save();
 
@@ -58,7 +59,8 @@ it("order status should be equal to cancelled" , async()=>{
 
     const ticket =  Ticket.build({
         title:'concer2t' ,
-        price:21
+        price:21,
+        id: new mongoose.Types.ObjectId().toHexString()
     })
 await ticket.save();
 
@@ -95,7 +97,8 @@ it("emits a order cancelled event" , async () => {
 
     const ticket =  Ticket.build({
         title:'concer2t' ,
-        price:21
+        price:21,
+        id: new mongoose.Types.ObjectId().toHexString()
     })
 await ticket.save();
 

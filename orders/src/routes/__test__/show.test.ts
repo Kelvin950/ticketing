@@ -11,7 +11,8 @@ it("fetches the order" , async ()=>{
       const ticket =  Ticket.build({
           title:'concet' 
           ,
-          price:20
+          price:20,
+          id: new mongoose.Types.ObjectId().toHexString()
       })
 
       await ticket.save();
