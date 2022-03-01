@@ -1,6 +1,8 @@
 import mongoose from 'mongoose'
 import  {app} from './app';
-import {natsWrapper} from './nats-wrapper'
+import {natsWrapper} from './nats-wrapper';
+import {OrderCancelledListener} from './Events/listener/order-cancelled-ticket';
+import {OrderCreatedListener} from './Events/listener/order-created-listener'
 const start =  async()=>{
 
   if(!process.env.JWt_KEY){
@@ -28,6 +30,9 @@ const start =  async()=>{
     process.on("SIGINT" , ()=>natsWrapper.client.close());
 process.on("SIGTERM" , ()=>natsWrapper.client.close());
 
+
+new OrderCreatedListener(natsWrapper.client).listen();
+new OrderCancelledListener(natsWrapper.client).listen();
   const host = await mongoose.connect(process.env.MONGO_URI)
   console.log(`host ${host.connection.host}`)
  }catch(err){

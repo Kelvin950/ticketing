@@ -2,7 +2,7 @@
 import mongoose from 'mongoose';
 import request from 'supertest';
 import {natsWrapper} from '../../nats-wrapper'
-
+import {Ticket}  from '../../Models/Ticket'
 import {app} from '../../app';
 const createTicket =  ()=>{
     return  request(app)
@@ -126,6 +126,7 @@ it("publishes an event", async ()=>{
        title:"dks",
        price:20
    });
+
     
      await request(app)
     .put(`/api/tickets/${res.body.id}`)
@@ -138,3 +139,28 @@ it("publishes an event", async ()=>{
    
       expect(natsWrapper.client.publish).toHaveBeenCalled();
 })
+
+
+it('rejects updates if the ticket is reserved' , async()=>{
+    const cookie  =  global.signup()
+    const  res=await request(app)
+   .post("/api/tickets")
+   .set("Cookie" ,cookie)
+   .send({
+       title:"dks",
+       price:20
+   });
+    const ticket =  await Ticket.findById(res.body.id);
+    ticket!.set({orderId: new mongoose.Types.ObjectId().toHexString() })
+    await ticket!.save();
+     await request(app)
+    .put(`/api/tickets/${res.body.id}`)
+    .set("Cookie" , cookie)
+    .send({
+        title:"new title",
+        price:200
+    })
+      .expect(400)
+   
+
+});
