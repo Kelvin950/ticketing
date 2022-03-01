@@ -1,6 +1,6 @@
 import {Request ,Response,NextFunction} from 'express'
 import {Ticket} from '../Models/Ticket';
-import {NotFoundError ,NotAuthorizedError} from '@katickets212/common';
+import {NotFoundError ,NotAuthorizedError , BadRequestError} from '@katickets212/common';
 import {TicketCreatedPublisher} from '../Events/publishers/ticket-created-publisher';
  import {TicketUpdatedPublisher} from '../Events/publishers/ticket-updated';
 import {natsWrapper} from '../nats-wrapper'
@@ -18,8 +18,8 @@ export const newTickets =async(req:Request , res:Response)=>{
     id:ticket.id,
     title:ticket.title,
     price:+ticket.price ,
-    userId:ticket.userId
-
+    userId:ticket.userId,
+    version:ticket.version
 
 })
     res.status(201).send(ticket);
@@ -59,6 +59,9 @@ if(!ticket){
 
 }
 
+// if(ticket.orderId){
+//     throw new BadRequestError("Cannot edit a reserved ticket");
+// }
  if(ticket.userId !== req.currentUser!.id){
      throw new NotAuthorizedError() 
  }
@@ -73,7 +76,8 @@ await ticket.save();
       title:ticket.title ,
       id:ticket.id ,
       price:ticket.price ,
-      userId:ticket.userId
+      userId:ticket.userId,
+      version:ticket.version
  })
 res.send(ticket);
 
