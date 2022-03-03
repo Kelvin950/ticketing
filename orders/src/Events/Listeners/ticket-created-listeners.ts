@@ -18,7 +18,7 @@ export class  TicketCreatedListener extends  Listener<TicketCreatedEvent>{
     })
   
     await  ticket.save();
-
+console.log(ticket);
 
      msg.ack();
 

@@ -42,6 +42,14 @@ build :
         manual :
           - src: 'src/**/*.ts'
             dest: .
+    - image: us.gcr.io/ticket-dev-340116/payment
+      context: payment
+      docker:
+        dockerfile : Dockerfile
+      sync :
+        manual :
+          - src: 'src/**/*.ts'
+            dest: .
     - image: us.gcr.io/ticket-dev-340116/expiration
       context: expiration
       docker:
