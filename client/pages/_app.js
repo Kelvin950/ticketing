@@ -6,7 +6,11 @@ const AppComponent =  ({Component , pageProps ,currentUser})=>{
 
     return <Fragment>
     <Header currentUser = {currentUser}/>
-<Component {...pageProps}/>
+    <div className="container">
+
+   
+<Component currentUser={currentUser} {...pageProps}/>
+</div>
     </Fragment>
     
     
@@ -21,7 +25,7 @@ const res =  await client.get("/api/users/currentuser");
 let pageProps={};
 
 if(appContext.Component.getInitialProps){
-   pageProps =  await appContext.Component.getInitialProps(appContext.ctx);
+   pageProps =  await appContext.Component.getInitialProps(appContext.ctx ,client ,res.data.currentUser);
 }
 
 
