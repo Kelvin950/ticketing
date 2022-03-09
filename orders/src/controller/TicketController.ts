@@ -6,7 +6,7 @@ import 'express-async-errors';
  import {OrderCreatedPublisher} from  '../Events/publishers/order-createdd-events';
  import {natsWrapper} from '../nats-wrapper';
 import {NotFoundError , OrderStatus ,BadRequestError ,NotAuthorizedError} from '@katickets212/common';
-const EXPIRATION_WINDOW_SECONDS =  1 *60;
+const EXPIRATION_WINDOW_SECONDS =  1 * 60;
 export const newController =  async (req:Request,res:Response )=>{
    //Find the ticket the user is trying to order in the database
 const {ticketId} =  req.body;
@@ -27,8 +27,8 @@ if(!ticket){
   }
    //calculate the expiration date 
   const expiration =  new Date();
-  expiration.setSeconds(expiration.getSeconds() + EXPIRATION_WINDOW_SECONDS);
-
+  expiration.setSeconds(expiration.getSeconds() +   EXPIRATION_WINDOW_SECONDS);
+console.log(expiration);
    //build the order and save it to the database 
      const order =  Order.buildOrders({
         userId:req.currentUser!.id ,

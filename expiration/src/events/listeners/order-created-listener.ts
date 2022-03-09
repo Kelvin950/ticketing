@@ -16,7 +16,7 @@ export class OrderCreatedListener  extends  Listener<OrderCreatedEvents>{
          orderId:data.id
      } ,
      {
-         delay:60000
+         delay
      }
     )
      msg.ack();
