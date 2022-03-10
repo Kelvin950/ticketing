@@ -2,6 +2,8 @@ import Link from 'next/link'
 function Header({currentUser}) {
 const links = [
  !currentUser &&   {label:"Sign Up" ,href:"/auth/signup"},
+ currentUser && {label:'Sell Tickets' , href:'/tickets/new'},
+ currentUser && {label:"My Orders" , href:"/order"},
    !currentUser && {label:"Sign In" ,href:"/auth/signin"},
  currentUser &&   {label:"Sign Out" ,href:"/auth/signout"},
 
