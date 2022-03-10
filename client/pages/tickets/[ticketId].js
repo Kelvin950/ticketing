@@ -20,7 +20,9 @@ const  {doRequest , errors} =  useRequest({
            { ticket.price}
         </h4>
         {errors}
-    <button className="btn btn-primary" onClick={doRequest}>Purchase</button>
+    <button className="btn btn-primary" onClick={()=>{
+        doRequest()
+    }}>Purchase</button>
        </div>
 
      );
