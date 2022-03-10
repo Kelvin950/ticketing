@@ -1,11 +1,37 @@
+import {useState , useEffect} from 'react';
 function OrderShow({order}) {
 
-    const mseft= new Date(order.expiresAt + 33).getTime()- new Date().getTime();
+    const [timeLeft  , setTimeLeft] =  useState(0);
+ 
 
+    useEffect(()=>{
+        
+        const findTimeLeft=()=>{
+            const mseft= new Date(order.expiresAt).getTime()- new Date().getTime();
+            setTimeLeft(Math.round(mseft/1000));
+
+        };
+findTimeLeft();
+  const timerId=       setInterval(findTimeLeft , 1000);
+
+  return ()=>{
+      clearInterval(timerId);
+  }
+    
+    } ,  [order]);
+    console.log(timeLeft);
+
+    if(timeLeft <=0){
+        return <div>
+            Order expired
+        </div>
+    }
     return (
 
         <div>
-            {mseft} seconds
+            {
+            timeLeft
+            } seconds
             until the order expires
         </div>
       );
