@@ -20,9 +20,8 @@ const orderId = new mongoose.Types.ObjectId().toHexString();
     const data:OrderCancelledEvent['data'] =  {
         id:orderId ,
         version:0 ,
-        ticket:{
-            id:ticket.id
-        }
+        ticketid:ticket.id
+        
     }
       
     //@ts-ignore
