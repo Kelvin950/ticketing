@@ -42,7 +42,9 @@ const id =  req.params.id;
 
 export const indexController = async (req:Request ,res:Response,next:NextFunction)=>{
    
-const tickets =  await Ticket.find({}); 
+const tickets =  await Ticket.find({
+    orderId:undefined
+}); 
 
  res.send(tickets)
 
