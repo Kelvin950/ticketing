@@ -31,9 +31,12 @@
 | [Auth](./auth)         | TypeScript, MySQL          | Handles user regristration, logging in, signing out and resetting users passwords  |
 
 | [Expiration](./expiration)    | TypeScript, Redis          | Expires tickets listings once they have ran out of time remaining on the listing |
+
 | [client](./client) | , React, Next.js | Handles serving the website to the user utilizing Server Side Rendering using React with Next.js |
+
 | [orders](./orders) | TypeScript, MySQL          | Allows users to make orders on a ticket |
 | [Payments](./payment) | TypeScript, MySQL          | Allows users to pay for ticket |
+
 | [tickets](./tickets) | TypeScript, MySQL          | Saves ticket created by users|
 
 
@@ -46,7 +49,7 @@
 - [MySQL](https://www.mysql.com/) -  An open-source relational database management system
 - [Redis](https://redis.io/) -Redis is an in-memory data structure store, used as a distributed, in-memory key–value database, cache and message broker, with optional durability.
 
-- [Docker](https://www.docker.com/) - A platform for developing, shippinh and running applications
+- [Docker](https://www.docker.com/) - A platform for developing, shipping and running applications
 - [Kubernetes](https://kubernetes.io/) -  An open-source system for automating deployment, scaling, and management of containerized applications
 - [Ingress NGINX](https://kubernetes.github.io/ingress-nginx/) - NGINX Ingress Controller for Kubernetes
 - [Skaffold](https://skaffold.dev/) - Handles the workflow for building, pushing and deploying applications
@@ -62,7 +65,7 @@
 
 This is my first project on microservices. I followed[Stephen Griders course on Microservices](https://www.udemy.com/course/microservices-with-node-js-and-react/).
 However I am yet to add more functionalities of my own to it and I cannot wait to create more microservice project.
-## 🚀 Local Development
+
 
 
 
