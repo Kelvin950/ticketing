@@ -28,18 +28,14 @@
 
 | Service                             | Technologies               | Description             |
 | ----------------------------------- | -------------------------- | ----------------------- |
-| [Auth](./auth)         | TypeScript, MySQL          | Handles user regristration, logging in, signing out and resetting users passwords  |
-
-|[Expiration](./expiration)|  TypeScript, Redis        |Expires tickets listings once they have ran out of time remaining on the listing     |
-
-|  [client](./client)      | , React, Next.js          | Handles user regristration, logging in, signing out and resetting users passwords  |
-
-| [orders](./orders)      | TypeScript, MySQL          | Allows users to make orders on a ticket  |
-
-|  [Payments](./payment)  | TypeScript, MySQL          |  Allows users to pay for ticket   |
-
-|  [tickets](./tickets)   | TypeScript, MySQL          | Saves ticket created by users |
-
+| [Auth](./services/auth)         | TypeScript, MySQL          | Handles user regristration, logging in, signing out and resetting users passwords  |
+| [Bids](./services/bid)          | TypeScript, MySQL          | Handles users placing bids on auction listings and allows for real-time bidding using Socket.io |
+| [Email](./services/email)       | TypeScript                 | Allows other services to send emails to users by publishing EmailCreated events |
+| [Expiration](./services/bid)    | TypeScript, Redis          | Expires auction listings once they have ran out of time remaining on the listing |
+| [Frontend](./services/frontend) | TypeScript, React, Next.js | Handles serving the website to the user utilizing Server Side Rendering using React with Next.js |
+| [Listings](./services/listings) | TypeScript, MySQL          | Allows users to create and delete auction listings |
+| [Payments](./services/payments) | TypeScript, MySQL          | Allows users to pay for auction listings they have won   |
+| [Profile](./services/profile)   | TypeScript, MySQL          | Allows users to get a users profile or update their own |
 
 
 ## 💻 Technologies
