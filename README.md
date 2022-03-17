@@ -63,7 +63,7 @@
 ## 📙 About this Project
 
 This is my first project on microservices. I followed[Stephen Griders course on Microservices](https://www.udemy.com/course/microservices-with-node-js-and-react/).
-However I am yet to add more functionalities of my own to it and I cannot wait to create more microservice project.
+However I am yet to add more functionalities of my own to it and I cannot wait to create more microservices projects.
 
 
 
