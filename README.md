@@ -30,15 +30,15 @@
 | ----------------------------------- | -------------------------- | ----------------------- |
 | [Auth](./auth)         | TypeScript, MySQL          | Handles user regristration, logging in, signing out and resetting users passwords  |
 
-|  [Expiration](./expiration)         |  TypeScript, Redis          |Expires tickets listings once they have ran out of time remaining on the listing|
+|[Expiration](./expiration)|  TypeScript, Redis        |Expires tickets listings once they have ran out of time remaining on the listing     |
 
-|  [client](./client)    | , React, Next.js        | Handles user regristration, logging in, signing out and resetting users passwords  |
+|  [client](./client)      | , React, Next.js          | Handles user regristration, logging in, signing out and resetting users passwords  |
 
 | [orders](./orders)      | TypeScript, MySQL          | Allows users to make orders on a ticket  |
 
-|  [Payments](./payment)     | TypeScript, MySQL          |  Allows users to pay for ticket   |
+|  [Payments](./payment)  | TypeScript, MySQL          |  Allows users to pay for ticket   |
 
-|  [tickets](./tickets)    | TypeScript, MySQL          | Saves ticket created by users |
+|  [tickets](./tickets)   | TypeScript, MySQL          | Saves ticket created by users |
 
 
 
